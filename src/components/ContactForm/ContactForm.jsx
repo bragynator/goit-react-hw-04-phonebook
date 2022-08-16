@@ -6,8 +6,22 @@ export function ContactForm({ onSubmit }) {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const handleChangeName = e => setName(e.target.value);
-  const handleChangeNumber = e => setNumber(e.target.value);
+  const handleInputChange = e => {
+    const { name, value } = e.target;
+
+    switch (name) {
+      case 'name':
+        setName(value);
+        break;
+
+      case 'number':
+        setNumber(value);
+        break;
+
+      default:
+        return;
+    }
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -31,7 +45,7 @@ export function ContactForm({ onSubmit }) {
           title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
           required
           value={name}
-          onChange={handleChangeName}
+          onChange={handleInputChange}
         />
       </label>
       <label>
@@ -43,7 +57,7 @@ export function ContactForm({ onSubmit }) {
           title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
           value={number}
-          onChange={handleChangeNumber}
+          onChange={handleInputChange}
         />
       </label>
       <button type="submit">Add Contact</button>
